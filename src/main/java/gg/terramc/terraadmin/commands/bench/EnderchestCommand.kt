@@ -6,23 +6,25 @@ import gg.terramc.terraadmin.screen.GrindstoneCommandScreenHandler
 import me.lucko.fabric.api.permissions.v0.Permissions
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.NamedTextColor
+import net.minecraft.screen.GenericContainerScreenHandler
 import net.minecraft.screen.ScreenHandlerContext
 import net.minecraft.screen.ScreenHandlerFactory
 import net.minecraft.screen.SimpleNamedScreenHandlerFactory
 import net.minecraft.text.Text
 import net.silkmc.silk.commands.command
 
-fun getGrindstoneFactory(): ScreenHandlerFactory {
+fun getEnderchestFactory(): ScreenHandlerFactory {
     return ScreenHandlerFactory { syncId, inv, player ->
-        GrindstoneCommandScreenHandler(syncId, inv, ScreenHandlerContext.create(player.entityWorld, player.blockPos))
+        GenericContainerScreenHandler.createGeneric9x3(syncId, inv, player.enderChestInventory)
     }
 }
 
-val GrindstoneCommand = command("grindstone") {
+val EnderchestCommand = command("enderchest") {
     runs {
         val player = source.playerOrThrow
 
-        if (!Permissions.check(player, "terraadmin.grindstone")) {
+        if (!Permissions.check(player, "terraadmin.enderchest")) {
+            TerraAdmin.LOGGER.info("[TA] ${player.name.string} tried to run /enderchest")
             source.sendMessage(
                 TerraAdmin.PREFIX.append(
                     Component.text("You don't have permission to execute this command.").color(
@@ -31,8 +33,8 @@ val GrindstoneCommand = command("grindstone") {
         }
 
 
-        val screen = SimpleNamedScreenHandlerFactory(getGrindstoneFactory(), Text.translatable("block.minecraft.grindstone"))
-
+        val screen = SimpleNamedScreenHandlerFactory(getEnderchestFactory(), Text.translatable("container.enderchest"))
+        TerraAdmin.LOGGER.info("[TA] ${player.name.string} ran /enderchest")
         player.openHandledScreen(screen)
     }
 }
