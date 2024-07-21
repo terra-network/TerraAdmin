@@ -1,0 +1,67 @@
+name: publish
+on:
+  push:
+    branches:
+      - "master"
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        java: [
+          17
+        ]
+    runs-on: ubuntu-22.04
+    steps:
+      - name: checkout repository
+        uses: actions/checkout@v4
+      - name: validate gradle wrapper
+        uses: gradle/wrapper-validation-action@v2
+      - name: Get mod version
+        id: mod_version
+        uses: BrycensRanch/read-properties-action@v1
+        with:
+          file: gradle.properties
+          property: mod_version
+          default: 0.0.1-SNAPSHOT
+      - name: Check if version is published
+        id: check-published
+        uses: mukunku/tag-exists-action@v1.6.0
+        with:
+          tag: v${{ steps.mod_version.outputs.mod_version }}
+      - name: setup jdk ${{ matrix.java }}
+        uses: actions/setup-java@v4
+        with:
+          java-version: ${{ matrix.java }}
+          distribution: 'microsoft'
+      - name: make gradle wrapper executable
+        run: chmod +x ./gradlew
+      - name: build
+        run: ./gradlew build
+      - name: Publish version
+        uses: Kir-Antipov/mc-publish@v3.3
+        if: steps.check-published.outputs.exists == 'false'
+        with:
+          name: TerraAdmin-${{ steps.mod_version.outputs.mod_version  }}
+          version: ${{ steps.mod_version.outputs.mod_version  }}
+          version-type: alpha
+          github-tag: v${{ steps.mod_version.outputs.mod_version }}
+          github-generate-changelog: true
+          github-token: ${{ secrets.PUBLISH_TOKEN }}
+          modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
+          modrinth-id: A124wUO5
+          modrinth-featured: true
+          curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
+          curseforge-id: 1067872
+          changelog-file: changelogs/${{ steps.mod_version.outputs.mod_version  }}.md
+          files: build/libs/TerraAdmin-${{ steps.mod_version.outputs.mod_version  }}.jar
+          loaders: |
+            fabric
+          game-versions: |
+            1.20.1
+          java: |
+            17
+          dependencies: |
+            fabric-api(required){modrinth:P7dR8mSH}{curseforge:306612}
+            fabric-language-kotlin(optional){modrinth:Ha28R6CL}{curseforge:308769}
+            luckperms(optional){modrinth:Vebnzrzj}{curseforge:431733}

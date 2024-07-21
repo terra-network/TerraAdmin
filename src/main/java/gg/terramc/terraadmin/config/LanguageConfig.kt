@@ -9,8 +9,6 @@ import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.minimessage.MiniMessage
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder
 import net.minecraft.server.network.ServerPlayerEntity
-import net.minecraft.world.GameMode
-import org.apache.logging.log4j.core.jmx.Server
 import java.io.File
 import kotlin.io.path.*
 

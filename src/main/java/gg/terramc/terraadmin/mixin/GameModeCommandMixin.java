@@ -12,6 +12,10 @@ import org.spongepowered.asm.mixin.Shadow;
 
 @Mixin(priority = 5, value = GameModeCommand.class)
 public abstract class GameModeCommandMixin {
+    /**
+     * @author braden
+     * @reason Because I can
+     */
     @Overwrite
     public static void register(CommandDispatcher<ServerCommandSource> dispatcher) {
         LiteralArgumentBuilder<ServerCommandSource> literalArgumentBuilder = CommandManager.literal("vanillagamemode")
