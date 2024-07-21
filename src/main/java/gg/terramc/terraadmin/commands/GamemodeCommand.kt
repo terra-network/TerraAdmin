@@ -1,6 +1,8 @@
 package gg.terramc.terraadmin.commands
 
 import gg.terramc.terraadmin.TerraAdmin
+import gg.terramc.terraadmin.config.Configs
+import gg.terramc.terraadmin.config.LanguageConfig
 import me.lucko.fabric.api.permissions.v0.Permissions
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.NamedTextColor
@@ -13,7 +15,7 @@ fun setGamemodeCommand(executor: ServerPlayerEntity, server: MinecraftServer, ga
 
     if (!Permissions.check(executor, "terraadmin.gamemode")) {
         TerraAdmin.LOGGER.info("[TA] ${executor.name.string} tried to change gamemodes.")
-        executor.sendMessage(TerraAdmin.PREFIX.append(Component.text("You don't have permission to execute this command.").color(NamedTextColor.RED)))
+        executor.sendMessage(Configs.Language.prefix.append(Configs.Language.noPermission))
         return
     }
 
@@ -27,7 +29,7 @@ fun setGamemodeCommand(executor: ServerPlayerEntity, server: MinecraftServer, ga
 
     if (gamemodeF === null) {
         TerraAdmin.LOGGER.info("[TA] ${executor.name.string} tried to set gamemode to $gamemode but $gamemode does not exist.")
-        executor.sendMessage(TerraAdmin.PREFIX.append(Component.text("Value $gamemode is not a valid gamemode.").color(NamedTextColor.RED)))
+        executor.sendMessage(Configs.Language.prefix.append(Configs.Language.player.invalidGamemode(gamemode)))
         return
     }
 
@@ -38,14 +40,14 @@ fun setGamemodeCommand(executor: ServerPlayerEntity, server: MinecraftServer, ga
 
     if (playerEntity == null) {
         TerraAdmin.LOGGER.info("[TA] ${executor.name.string} tried to set $player's gamemode to ${gamemodeF.getName()} but $player does not exist.")
-        executor.sendMessage(TerraAdmin.PREFIX.append(Component.text("Player $player does not exist").color(NamedTextColor.RED)))
+        executor.sendMessage(Configs.Language.prefix.append(Configs.Language.playerNotFound(player)))
         return
     }
 
     if (playerEntity !== executor) {
         if (!Permissions.check(executor, "terraadmin.gamemode.others")) {
             TerraAdmin.LOGGER.info("[TA] ${executor.name.string} tried to set ${playerEntity.name.string}'s gamemode to ${gamemodeF.getName()}.")
-            executor.sendMessage(TerraAdmin.PREFIX.append(Component.text("You don't have permission to execute this command.").color(NamedTextColor.RED)))
+            executor.sendMessage(Configs.Language.prefix.append(Configs.Language.noPermission))
             return
         }
     }
@@ -53,10 +55,10 @@ fun setGamemodeCommand(executor: ServerPlayerEntity, server: MinecraftServer, ga
     playerEntity.changeGameMode(gamemodeF)
     if (playerEntity === executor) {
         TerraAdmin.LOGGER.info("[TA] ${executor.name.string} set their gamemode to ${gamemodeF.getName()}.")
-        executor.sendMessage(TerraAdmin.PREFIX.append(Component.text("Set gamemode to ${gamemodeF.getName()}").color(NamedTextColor.GREEN)))
+        executor.sendMessage(Configs.Language.prefix.append(Configs.Language.player.setGamemode(gamemodeF)))
     } else {
         TerraAdmin.LOGGER.info("[TA] ${executor.name.string} set ${playerEntity.name.string}'s gamemode to ${gamemodeF.getName()}.")
-        executor.sendMessage(TerraAdmin.PREFIX.append(Component.text("Set player ${playerEntity.name.string}'s gamemode to ${gamemodeF.getName()}").color(NamedTextColor.GREEN)))
+        executor.sendMessage(Configs.Language.prefix.append(Configs.Language.player.playerSetGamemode(gamemodeF, playerEntity)))
     }
     return
 

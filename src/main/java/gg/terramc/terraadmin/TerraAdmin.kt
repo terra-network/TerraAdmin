@@ -1,12 +1,10 @@
 package gg.terramc.terraadmin
 
-import gg.terramc.terraadmin.commands.FlyCommand
-import gg.terramc.terraadmin.commands.SeenCommand
-import gg.terramc.terraadmin.commands.TopCommand
+import gg.terramc.terraadmin.commands.*
 import gg.terramc.terraadmin.commands.bench.EnderchestCommand
 import gg.terramc.terraadmin.commands.bench.GrindstoneCommand
 import gg.terramc.terraadmin.commands.bench.WorkbenchCommand
-import gg.terramc.terraadmin.commands.registerGamemodes
+import gg.terramc.terraadmin.config.Configs
 import net.fabricmc.api.ModInitializer
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents
 import net.kyori.adventure.text.Component
@@ -26,6 +24,8 @@ class TerraAdmin : ModInitializer {
         var currentServer: MinecraftServer? = null
     }
     override fun onInitialize() {
+        Configs
+
         LOGGER.info("[INIT] TerraAdmin 1.0-SNAPSHOT")
         registerGamemodes()
         FlyCommand
@@ -34,6 +34,8 @@ class TerraAdmin : ModInitializer {
         GrindstoneCommand
         EnderchestCommand
         SeenCommand
+        HealCommand
+        FeedCommand
 
         ServerLifecycleEvents.SERVER_STARTING.register{ server ->
             currentServer = server;

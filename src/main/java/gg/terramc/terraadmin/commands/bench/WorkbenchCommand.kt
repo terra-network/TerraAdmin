@@ -1,6 +1,7 @@
 package gg.terramc.terraadmin.commands.bench
 
 import gg.terramc.terraadmin.TerraAdmin
+import gg.terramc.terraadmin.config.Configs
 import gg.terramc.terraadmin.screen.CraftingCommandScreenHandler
 import me.lucko.fabric.api.permissions.v0.Permissions
 import net.kyori.adventure.text.Component
@@ -22,10 +23,7 @@ val WorkbenchCommand = command("workbench") {
 
         if (!Permissions.check(player, "terraadmin.workbench")) {
             TerraAdmin.LOGGER.info("[TA] ${player.name.string} tried to run /workbench")
-            source.sendMessage(
-                TerraAdmin.PREFIX.append(
-                    Component.text("You don't have permission to execute this command.").color(
-                        NamedTextColor.RED)))
+            source.sendMessage(Configs.Language.prefix.append(Configs.Language.noPermission))
             return@runs
         }
 
@@ -43,10 +41,7 @@ val CraftCommand = command("craft") {
 
         if (!Permissions.check(player, "terraadmin.workbench")) {
             TerraAdmin.LOGGER.info("[TA] ${player.name.string} tried to run /craft")
-            source.sendMessage(
-                TerraAdmin.PREFIX.append(
-                    Component.text("You don't have permission to execute this command.").color(
-                        NamedTextColor.RED)))
+            source.sendMessage(Configs.Language.prefix.append(Configs.Language.noPermission))
             return@runs
         }
 

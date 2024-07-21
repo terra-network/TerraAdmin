@@ -1,6 +1,7 @@
 package gg.terramc.terraadmin.commands
 
 import gg.terramc.terraadmin.TerraAdmin
+import gg.terramc.terraadmin.config.Configs
 import me.lucko.fabric.api.permissions.v0.Permissions
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.NamedTextColor
@@ -12,7 +13,7 @@ fun executeFly(executor: ServerPlayerEntity, server: MinecraftServer, player: St
 
     if (!Permissions.check(executor, "terraadmin.fly")) {
         TerraAdmin.LOGGER.info("[TA] ${executor.name.string} tried to run /fly.")
-        executor.sendMessage(TerraAdmin.PREFIX.append(Component.text("You don't have permission to execute this command.").color(NamedTextColor.RED)))
+        executor.sendMessage(Configs.Language.prefix.append(Configs.Language.noPermission))
         return
     }
 
@@ -23,13 +24,13 @@ fun executeFly(executor: ServerPlayerEntity, server: MinecraftServer, player: St
 
     if (playerEntity === null) {
         TerraAdmin.LOGGER.info("[TA] ${executor.name.string} tried to run /fly ${player} but the player didn't exist.")
-        executor.sendMessage(TerraAdmin.PREFIX.append(Component.text("Player $player does not exist").color(NamedTextColor.RED)))
+        executor.sendMessage(Configs.Language.prefix.append(Configs.Language.playerNotFound(player)))
         return
     }
 
     if (playerEntity !== executor && !Permissions.check(executor, "terraadmin.fly.others")) {
         TerraAdmin.LOGGER.info("[TA] ${executor.name.string} tried to run /fly ${playerEntity.name.string}.")
-        executor.sendMessage(TerraAdmin.PREFIX.append(Component.text("You don't have permission to execute this command.").color(NamedTextColor.RED)))
+        executor.sendMessage(Configs.Language.prefix.append(Configs.Language.noPermission))
         return
     }
 
@@ -39,11 +40,11 @@ fun executeFly(executor: ServerPlayerEntity, server: MinecraftServer, player: St
         playerEntity.sendAbilitiesUpdate()
         if (playerEntity != executor) {
             TerraAdmin.LOGGER.info("[TA] ${executor.name.string} disabled flight for ${playerEntity.name.string}.")
-            executor.sendMessage(TerraAdmin.PREFIX.append(Component.text("${playerEntity.name.string} can no longer fly.").color(NamedTextColor.RED)))
+            executor.sendMessage(Configs.Language.prefix.append(Configs.Language.movement.playerNoLongerFlying(playerEntity)))
             return;
         }
         TerraAdmin.LOGGER.info("[TA] ${executor.name.string} disabled flight.")
-        executor.sendMessage(TerraAdmin.PREFIX.append(Component.text("You can no longer fly.").color(NamedTextColor.RED)))
+        executor.sendMessage(Configs.Language.prefix.append(Configs.Language.movement.noLongerFlying))
         return
     }
     playerEntity.abilities.allowFlying = true
@@ -51,11 +52,11 @@ fun executeFly(executor: ServerPlayerEntity, server: MinecraftServer, player: St
     playerEntity.sendAbilitiesUpdate()
     if (playerEntity != executor) {
         TerraAdmin.LOGGER.info("[TA] ${executor.name.string} enabled flight for ${playerEntity.name.string}.")
-        executor.sendMessage(TerraAdmin.PREFIX.append(Component.text("${playerEntity.name.string} can now fly.").color(NamedTextColor.GREEN)))
+        executor.sendMessage(Configs.Language.prefix.append(Configs.Language.movement.playerNowFlying(playerEntity)))
         return
     }
     TerraAdmin.LOGGER.info("[TA] ${executor.name.string} enabled flight.")
-    executor.sendMessage(TerraAdmin.PREFIX.append(Component.text("You can now fly.").color(NamedTextColor.GREEN)))
+    executor.sendMessage(Configs.Language.prefix.append(Configs.Language.movement.nowFlying))
     return
 }
 

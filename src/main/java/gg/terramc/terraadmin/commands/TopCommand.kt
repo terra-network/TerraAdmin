@@ -1,6 +1,7 @@
 package gg.terramc.terraadmin.commands
 
 import gg.terramc.terraadmin.TerraAdmin
+import gg.terramc.terraadmin.config.Configs
 import me.lucko.fabric.api.permissions.v0.Permissions
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.NamedTextColor
@@ -17,7 +18,7 @@ val TopCommand = command("top") {
 
         if (!Permissions.check(source.player!!, "terraadmin.top")) {
 
-            source.sendMessage(TerraAdmin.PREFIX.append(Component.text("You don't have permission to execute this command.").color(NamedTextColor.RED)))
+            source.sendMessage(Configs.Language.prefix.append(Configs.Language.noPermission))
             TerraAdmin.LOGGER.info("[TA] ${source.player!!.name.string} tried to run /top.")
             return@runs
         }
@@ -32,14 +33,14 @@ val TopCommand = command("top") {
         newY = getTop(chunk, newX, newZ)
 
         if (newY === null) {
-            source.sendMessage(TerraAdmin.PREFIX.append(Component.text("Could not find a safe top.").color(NamedTextColor.RED)))
+            source.sendMessage(Configs.Language.prefix.append(Configs.Language.movement.noSafeTop))
             TerraAdmin.LOGGER.info("[TA] ${source.player!!.name.string} tried to run /top but there was no safe tp.")
             return@runs
         }
 
         source.player!!.teleport(source.world, newX.toDouble(), newY.toDouble(), newZ.toDouble(), source.player!!.getHeadYaw(), source.player!!.pitch)
         TerraAdmin.LOGGER.info("[TA] ${source.player!!.name.string} ran /top.")
-        source.sendMessage(TerraAdmin.PREFIX.append(Component.text("Teleporting to top.").color(NamedTextColor.GREEN)))
+        source.sendMessage(Configs.Language.prefix.append(Configs.Language.movement.teleportedTop))
     }
 }
 
