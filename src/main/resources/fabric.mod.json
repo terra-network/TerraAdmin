@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "id": "terraadmin",
+  "version": "${version}",
+  "name": "TerraAdmin",
+  "description": "",
+  "authors": [
+    "braden"
+  ],
+  "contact": {
+    "website": "braden.gg",
+    "repo": "https://github.com/braden/TerraAdmin"
+  },
+  "license": "GPL-3.0",
+  "icon": "assets/terraadmin/icon.png",
+  "environment": "server",
+  "entrypoints": {
+    "client": [
+      "gg.terramc.terraadmin.client.TerraAdminClient"
+    ],
+    "main": [
+      "gg.terramc.terraadmin.TerraAdmin"
+    ]
+  },
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric": "*",
+    "minecraft": "${minecraft_version}"
+  }
+}
