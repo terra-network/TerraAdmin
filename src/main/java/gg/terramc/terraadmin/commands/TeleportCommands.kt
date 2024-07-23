@@ -12,6 +12,18 @@ val TPHereCommand = command("tphere") {
                 source.sendFailure(Configs.Language.prefix.append(Configs.Language.mustBePlayer))
                 return@runs
             }
+
+
+            val targetPlayer = source.server.playerManager.getPlayer(target())
+            if (targetPlayer === null) {
+                source.sendMessage(Configs.Language.prefix.append(Configs.Language.playerNotFound(target())))
+                return@runs
+            }
+
+            val author = source.player!!
+
+            targetPlayer.teleport(author.serverWorld, author.x, author.y, author.z, author.getHeadYaw(), author.pitch)
+            source.sendMessage(Configs.Language.prefix.append(Configs.Language.movement.teleportedPlayerHere(targetPlayer)))
         }
     }
 }

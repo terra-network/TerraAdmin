@@ -18,5 +18,8 @@ class LanguageMovementConfig(private val mm: MiniMessage, private val data: Lang
     }
     val teleportedTop = mm.deserialize(data.teleportedTop)
     val noSafeTop = mm.deserialize(data.noSafeTop)
+    val teleportedPlayerHere: (player: ServerPlayerEntity) -> Component = { player ->
+        LanguageConfig.insertPlayer(data.teleportedPlayerHere, player)
+    }
 
 }

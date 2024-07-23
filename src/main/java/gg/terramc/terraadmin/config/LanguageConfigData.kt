@@ -21,12 +21,13 @@ class LanguageConfigData {
 
     @Serializable
     data class MovementCommands (
-        var playerNowFlying: String = "<$THEME_COLOR><player>'s ꜰʟʏɪɴɢ: <green>ᴇɴᴀʙʟᴇᴅ</green>",
+        var playerNowFlying: String = "<$THEME_COLOR><player>'s <white>ꜰʟʏɪɴɢ:</white> <green>ᴇɴᴀʙʟᴇᴅ</green>",
         var playerNoLongerFlying: String = "<player>'s ꜰʟʏɪɴɢ: <red>ᴅɪꜱᴀʙʟᴇᴅ</red>",
         var nowFlying: String = "<white>ꜰʟʏɪɴɢ: </white><green>ᴇɴᴀʙʟᴇᴅ</green>",
         var noLongerFlying: String = "<white>ꜰʟʏɪɴɢ: </white><red>ᴅɪꜱᴀʙʟᴇᴅ</red>",
         var teleportedTop: String = "<white>ᴛᴇʟᴇᴘᴏʀᴛᴇᴅ ᴛᴏ ᴛʜᴇ ᴛᴏᴘ.</white>",
-        var noSafeTop: String = "<red>ᴛʜᴇʀᴇ ᴡᴀꜱ ɴᴏ ꜱᴀꜰᴇ ᴘʟᴀᴄᴇ ᴛᴏ ɢᴏ ᴛᴏ.</red>"
+        var noSafeTop: String = "<red>ᴛʜᴇʀᴇ ᴡᴀꜱ ɴᴏ ꜱᴀꜰᴇ ᴘʟᴀᴄᴇ ᴛᴏ ɢᴏ ᴛᴏ.</red>",
+        var teleportedPlayerHere: String = "<white>ᴛᴇʟᴇᴘᴏʀᴛᴇᴅ </white><$THEME_COLOR><player> <white>ᴛᴏ ʏᴏᴜ.</white>"
     )
 
     @Serializable

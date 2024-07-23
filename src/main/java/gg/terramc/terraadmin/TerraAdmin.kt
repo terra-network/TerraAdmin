@@ -36,6 +36,7 @@ class TerraAdmin : ModInitializer {
         SeenCommand
         HealCommand
         FeedCommand
+        TPHereCommand
 
         ServerLifecycleEvents.SERVER_STARTING.register{ server ->
             currentServer = server;
