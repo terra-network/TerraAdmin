@@ -40,6 +40,11 @@ class LanguageConfigData {
         val gamemodeSpectator: String = "ꜱᴘᴇᴄᴛᴀᴛᴏʀ",
         val gamemodeAdventure: String = "ᴀᴅᴠᴇɴᴛᴜʀᴇ",
         val healedPlayer: String = "<white>ʜᴇᴀʟᴇᴅ </white><$THEME_COLOR><player><white>.</white>",
-        val fedPlayer: String = "<white>ꜰᴇᴅ </white><$THEME_COLOR><player><white>.</white>"
+        val fedPlayer: String = "<white>ꜰᴇᴅ </white><$THEME_COLOR><player><white>.</white>",
+        val mutedPlayer: String = "<white>ᴍᴜᴛᴇᴅ <$THEME_COLOR><player> <white>ꜰᴏʀ</white> <$THEME_COLOR><duration><white>.",
+        val gotMuted: String = "<$THEME_COLOR>ʏᴏᴜ<white> ʜᴀᴠᴇ ʙᴇᴇɴ ᴍᴜᴛᴇᴅ ꜰᴏʀ </white><$THEME_COLOR><duration><white>.</white>",
+        val areMuted: String = "<$THEME_COLOR>ʏᴏᴜ<white> ᴀʀᴇ ᴍᴜᴛᴇᴅ ꜰᴏʀ ᴀɴᴏᴛʜᴇʀ </white><$THEME_COLOR><duration><white>.</white>",
+        val unmutedPlayer: String = "<white>ᴜɴᴍᴜᴛᴇᴅ <$THEME_COLOR><player><white>.",
+        val gotUnmuted: String = "<$THEME_COLOR>ʏᴏᴜ<white> ʜᴀᴠᴇ ʙᴇᴇɴ ᴜɴᴍᴜᴛᴇᴅ."
     )
 }

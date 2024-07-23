@@ -51,6 +51,14 @@ class LanguageConfig(private val path: String, private val data: LanguageConfigD
         fun insertPlayerAndGamemode(data: String, gameMode: String, player: ServerPlayerEntity): Component {
             return mm.deserialize(data, Placeholder.unparsed("gamemode", gameMode), Placeholder.unparsed("player", player.name.string))
         }
+
+        fun insertPlayerAndDuration(data: String, player: ServerPlayerEntity, duration: String): Component {
+            return mm.deserialize(data, Placeholder.unparsed("player", player.name.string), Placeholder.unparsed("duration", duration))
+        }
+
+        fun insertDuration(data: String, duration: String): Component {
+            return mm.deserialize(data, Placeholder.unparsed("duration", duration))
+        }
     }
 
     val prefix = mm.deserialize(data.prefix)

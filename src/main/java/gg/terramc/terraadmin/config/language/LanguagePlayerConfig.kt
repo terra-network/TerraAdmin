@@ -25,6 +25,24 @@ class LanguagePlayerConfig(private val mm: MiniMessage, private val data: Langua
         LanguageConfig.insertPlayer(data.fedPlayer, player)
     }
 
+    var mutedPlayer: (player: ServerPlayerEntity, duration: String) -> Component = { player, duration ->
+        LanguageConfig.insertPlayerAndDuration(data.mutedPlayer, player, duration)
+    }
+
+    var gotMuted: (duration: String) -> Component = { duration ->
+        LanguageConfig.insertDuration(data.gotMuted, duration)
+    }
+
+    var areMuted: (duration: String) -> Component = { duration ->
+        LanguageConfig.insertDuration(data.areMuted, duration)
+    }
+
+    var unmutedPlayer: (player: ServerPlayerEntity) -> Component = { player ->
+        LanguageConfig.insertPlayer(data.unmutedPlayer, player)
+    }
+
+    var gotUnmuted = mm.deserialize(data.gotUnmuted)
+
     private fun gamemodeToString(gameMode: GameMode): String {
         return when (gameMode) {
             GameMode.SURVIVAL -> data.gamemodeSurvival

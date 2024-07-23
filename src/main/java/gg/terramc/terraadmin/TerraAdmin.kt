@@ -5,6 +5,7 @@ import gg.terramc.terraadmin.commands.bench.EnderchestCommand
 import gg.terramc.terraadmin.commands.bench.GrindstoneCommand
 import gg.terramc.terraadmin.commands.bench.WorkbenchCommand
 import gg.terramc.terraadmin.config.Configs
+import gg.terramc.terraadmin.events.registerMessageEvent
 import net.fabricmc.api.ModInitializer
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents
 import net.kyori.adventure.text.Component
@@ -37,6 +38,10 @@ class TerraAdmin : ModInitializer {
         HealCommand
         FeedCommand
         TPHereCommand
+        MuteCommand
+        UnmuteCommand
+
+        registerMessageEvent()
 
         ServerLifecycleEvents.SERVER_STARTING.register{ server ->
             currentServer = server;
