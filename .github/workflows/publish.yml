@@ -63,5 +63,5 @@ jobs:
             17
           dependencies: |
             fabric-api(required){modrinth:P7dR8mSH}{curseforge:306612}
-            fabric-language-kotlin(optional){modrinth:Ha28R6CL}{curseforge:308769}
-            luckperms(optional){modrinth:Vebnzrzj}{curseforge:431733}
+            fabric-language-kotlin(required){modrinth:Ha28R6CL}{curseforge:308769}
+            silk(required){modrinth:aTaCgKLW}{curseforge:447425}

@@ -3,8 +3,6 @@ package gg.terramc.terraadmin.commands
 import gg.terramc.terraadmin.TerraAdmin
 import gg.terramc.terraadmin.config.Configs
 import me.lucko.fabric.api.permissions.v0.Permissions
-import net.kyori.adventure.text.Component
-import net.kyori.adventure.text.format.NamedTextColor
 import net.silkmc.silk.commands.command
 
 val FeedCommand = command("feed") {
@@ -28,6 +26,5 @@ val FeedCommand = command("feed") {
             source.sendMessage(Configs.Language.prefix.append(Configs.Language.player.fedPlayer(targetPlayer)))
 
         }
-
     }
 }

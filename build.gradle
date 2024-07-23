@@ -58,7 +58,6 @@ dependencies {
 
     // Silk libraries
     modImplementation("net.silkmc:silk-commands:1.10.0")
-    modImplementation("net.silkmc:silk-persistence:1.10.0")
 
     // Adventure
     modImplementation(include("net.kyori:adventure-platform-fabric:5.9.0"))

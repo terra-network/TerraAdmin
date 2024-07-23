@@ -21,11 +21,7 @@ class LanguageConfig(private val path: String, private val data: LanguageConfigD
             val file = File(path)
             if (!file.exists()) {
                 val defaultString = Toml.encodeToString<LanguageConfigData.Config>(defaults)
-
-                val folder = Path("./config/terraadmin")
-                if (!folder.exists()) {
-                    folder.createDirectory()
-                }
+                verifyConfigFolders()
 
                 val newFile = Path(path).createFile()
                 newFile.writeText(defaultString, Charsets.UTF_8)
