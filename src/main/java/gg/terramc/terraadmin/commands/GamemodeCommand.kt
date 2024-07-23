@@ -12,7 +12,6 @@ import net.minecraft.world.GameMode
 import net.silkmc.silk.commands.command
 
 fun setGamemodeCommand(executor: ServerPlayerEntity, server: MinecraftServer, gamemode: String, player: String?) {
-
     if (!Permissions.check(executor, "terraadmin.gamemode")) {
         TerraAdmin.LOGGER.info("[TA] ${executor.name.string} tried to change gamemodes.")
         executor.sendMessage(Configs.Language.prefix.append(Configs.Language.noPermission))
@@ -75,13 +74,19 @@ val CreativeCommand = command("creative") {
             playerNameList
         }
         runs {
-            if (source.player === null) return@runs
+            if (source.player == null) {
+                source.sendFailure(Configs.Language.prefix.append(Configs.Language.mustBePlayer))
+                return@runs
+            }
             setGamemodeCommand(source.player!!, source.server, "creative", player())
             return@runs
         }
     }
     runs {
-        if (source.player === null) return@runs
+        if (source.player == null) {
+            source.sendFailure(Configs.Language.prefix.append(Configs.Language.mustBePlayer))
+            return@runs
+        }
         setGamemodeCommand(source.player!!, source.server, "creative", null)
         return@runs
     }
@@ -98,13 +103,15 @@ val ShortCreativeCommand = command("gmc") {
             playerNameList
         }
         runs {
-            if (source.player === null) return@runs
             setGamemodeCommand(source.player!!, source.server, "creative", player())
             return@runs
         }
     }
     runs {
-        if (source.player === null) return@runs
+        if (source.player == null) {
+            source.sendFailure(Configs.Language.prefix.append(Configs.Language.mustBePlayer))
+            return@runs
+        }
         setGamemodeCommand(source.player!!, source.server, "creative", null)
         return@runs
     }
@@ -121,13 +128,15 @@ val SurvivalCommand = command("survival") {
             playerNameList
         }
         runs {
-            if (source.player === null) return@runs
             setGamemodeCommand(source.player!!, source.server, "survival", player())
             return@runs
         }
     }
     runs {
-        if (source.player === null) return@runs
+        if (source.player == null) {
+            source.sendFailure(Configs.Language.prefix.append(Configs.Language.mustBePlayer))
+            return@runs
+        }
         setGamemodeCommand(source.player!!, source.server, "survival", null)
         return@runs
     }
@@ -150,7 +159,10 @@ val ShortSurvivalCommand = command("gms") {
         }
     }
     runs {
-        if (source.player === null) return@runs
+        if (source.player == null) {
+            source.sendFailure(Configs.Language.prefix.append(Configs.Language.mustBePlayer))
+            return@runs
+        }
         setGamemodeCommand(source.player!!, source.server, "survival", null)
         return@runs
     }
@@ -160,7 +172,10 @@ val GamemodeCommand = command("gamemode") {
     argument<String>("toMode") { toMode ->
         suggestList { listOf("creative", "survival", "spectator", "adventure") }
         runs {
-            if (source.player === null) return@runs
+            if (source.player == null) {
+                source.sendFailure(Configs.Language.prefix.append(Configs.Language.mustBePlayer))
+                return@runs
+            }
             setGamemodeCommand(source.player!!, source.server, toMode(), null)
             return@runs
         }
@@ -174,7 +189,6 @@ val GamemodeCommand = command("gamemode") {
                 playerNameList
             }
             runs {
-                if (source.player === null) return@runs
                 setGamemodeCommand(source.player!!, source.server, toMode(), player())
 
                 return@runs
@@ -187,5 +201,7 @@ val GamemodeCommand = command("gamemode") {
 fun registerGamemodes() {
     CreativeCommand
     ShortCreativeCommand
+    SurvivalCommand
+    ShortSurvivalCommand
     GamemodeCommand
 }

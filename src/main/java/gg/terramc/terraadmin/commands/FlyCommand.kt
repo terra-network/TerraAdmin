@@ -78,7 +78,10 @@ val FlyCommand = command("fly") {
     }
 
     runs {
-        if (source.player === null) return@runs
+        if (source.player == null) {
+            source.sendFailure(Configs.Language.prefix.append(Configs.Language.mustBePlayer))
+            return@runs
+        }
 
         executeFly(source.player!!, source.server, null)
     }

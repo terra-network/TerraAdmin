@@ -30,4 +30,13 @@ val HealCommand = command("heal") {
         }
 
     }
+
+    runs {
+        if (source.player == null) {
+            source.sendFailure(Configs.Language.prefix.append(Configs.Language.mustBePlayer))
+            return@runs
+        }
+        source.player!!.health = source.player!!.maxHealth
+        source.sendMessage(Configs.Language.prefix.append(Configs.Language.player.healedPlayer(source.player!!)))
+    }
 }

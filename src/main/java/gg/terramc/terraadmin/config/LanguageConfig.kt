@@ -58,6 +58,7 @@ class LanguageConfig(private val path: String, private val data: LanguageConfigD
     val playerNotFound: (player: String?) -> Component = { player ->
         insertPlayer(data.playerNotFound, player)
     }
+    val mustBePlayer = mm.deserialize(data.mustBePlayer)
     val movement = LanguageMovementConfig(mm, data.movement)
     val player = LanguagePlayerConfig(mm, data.player)
 

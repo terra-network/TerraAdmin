@@ -14,7 +14,10 @@ import kotlin.math.min
 
 val TopCommand = command("top") {
     runs {
-        if (source.player === null) return@runs
+        if (source.player == null) {
+            source.sendFailure(Configs.Language.prefix.append(Configs.Language.mustBePlayer))
+            return@runs
+        }
 
         if (!Permissions.check(source.player!!, "terraadmin.top")) {
 

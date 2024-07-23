@@ -13,6 +13,7 @@ class LanguageConfigData {
         var prefix: String = "<$THEME_COLOR>ᴛᴇʀʀᴀ <dark_gray><bold> • </bold></dark_gray>",
         var noPermission: String = "<red>ʏᴏᴜ ᴅᴏɴ'ᴛ ʜᴀᴠᴇ ᴘᴇʀᴍɪꜱꜱɪᴏɴ ᴛᴏ ᴇxᴇᴄᴜᴛᴇ ᴛʜɪꜱ ᴄᴏᴍᴍᴀɴᴅ.</red>",
         var playerNotFound: String = "<red>ᴘʟᴀʏᴇʀ <player> ᴄᴏᴜʟᴅ ɴᴏᴛ ʙᴇ ꜰᴏᴜɴᴅ.",
+        var mustBePlayer: String = "<red>You must be a player to execute this command.</red>",
         var movement: MovementCommands = MovementCommands(),
         var player: PlayerCommands = PlayerCommands()
 

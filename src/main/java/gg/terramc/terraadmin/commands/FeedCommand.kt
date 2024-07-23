@@ -27,4 +27,14 @@ val FeedCommand = command("feed") {
 
         }
     }
+
+    runs {
+        if (source.player == null) {
+            source.sendFailure(Configs.Language.prefix.append(Configs.Language.mustBePlayer))
+            return@runs
+        }
+
+        source.player!!.hungerManager.foodLevel = 20;
+        source.sendMessage(Configs.Language.prefix.append(Configs.Language.player.fedPlayer(source.player!!)))
+    }
 }
